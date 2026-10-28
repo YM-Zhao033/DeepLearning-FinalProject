@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>健康助手 — HAR Dashboard</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+<!-- ═══════════════════ SIDEBAR ═══════════════════ -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-icon">
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="2"/>
+        <path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="logo-text">
+      <span class="logo-title">健康助手</span>
+      <span class="logo-sub">HAR Dashboard</span>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a href="#overview" class="nav-item active" data-section="overview">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+        <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+      </svg>
+      概览
+    </a>
+    <a href="#activity" class="nav-item" data-section="activity">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+      </svg>
+      活动监测
+    </a>
+    <a href="#goals" class="nav-item" data-section="goals">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
+      </svg>
+      目标追踪
+    </a>
+    <a href="#trend" class="nav-item" data-section="trend">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
+      </svg>
+      趋势分析
+    </a>
+    <a href="#llm" class="nav-item" data-section="llm">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      </svg>
+      AI 健康助手
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="llm-status" id="llmStatus">
+      <div class="llm-dot"></div>
+      <span>AI 引擎</span>
+    </div>
+  </div>
+</aside>
+
+<!-- ═══════════════════ MAIN ═══════════════════ -->
+<main class="main-content">
+
+  <!-- ── Top Bar ── -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <h1 class="page-title" id="pageTitle">概览</h1>
+    </div>
+    <div class="topbar-right">
+      <div class="sim-time" id="simTime">
+        <span class="sim-label">模拟时间</span>
+        <span class="sim-value" id="simTimeValue">00:00:00</span>
+      </div>
+      <button class="btn btn-ghost" id="resetBtn" title="重置会话">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/>
+        </svg>
+        重置
+      </button>
+      <button class="btn btn-primary" id="demoBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="5 3 19 12 5 21 5 3"/>
+        </svg>
+        <span id="demoBtnText">开始演示</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ═══════════════════ OVERVIEW ═══════════════════ -->
+  <section id="section-overview" class="content-section active">
+
+    <div class="state-banner" id="stateBanner">
+      <div class="state-indicator" id="stateIndicator">
+        <div class="state-ring"></div>
+        <div class="state-icon" id="stateIconArea">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>
+          </svg>
+        </div>
+      </div>
+      <div class="state-info">
+        <div class="state-label">当前状态</div>
+        <div class="state-name" id="stateName">—</div>
+        <div class="state-sub" id="stateActivity">—</div>
+      </div>
+      <div class="state-badge" id="stateBadge">
+        <span id="stateBadgeText">准备就绪</span>
+      </div>
+    </div>
+
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2c-5.5 0-10 4.5-10 10s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/>
+            <path d="M12 6v6l4 2"/>
+          </svg>
+        </div>
+        <div class="metric-value" id="calValue">0.0</div>
+        <div class="metric-label">累计消耗 (kcal)</div>
+        <div class="metric-detail" id="calGoal">目标: 200 kcal</div>
+        <div class="metric-progress">
+          <div class="progress-bar" id="calProgress" style="width:0%"></div>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon active-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+        </div>
+        <div class="metric-value" id="activeValue">0.0</div>
+        <div class="metric-label">活动时间 (min)</div>
+        <div class="metric-detail" id="activeGoal">目标: 30 min</div>
+        <div class="metric-progress">
+          <div class="progress-bar active-progress" id="activeProgress" style="width:0%"></div>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon sitting-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 9a2 2 0 1 1 4 0v6a2 2 0 0 1-4 0V9zM13 9a2 2 0 1 1 4 0v6a2 2 0 0 1-4 0V9z"/>
+            <path d="M5 17h14v2a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-2z"/>
+          </svg>
+        </div>
+        <div class="metric-value" id="sittingValue">0.0</div>
+        <div class="metric-label">久坐时间 (min)</div>
+        <div class="metric-detail" id="sittingAlert">无久坐警告</div>
+        <div class="metric-progress">
+          <div class="progress-bar warning-progress-bar" id="sittingProgress" style="width:0%"></div>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon intensity-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+        </div>
+        <div class="metric-value" id="intensityValue">—</div>
+        <div class="metric-label">活动强度等级</div>
+        <div class="metric-detail" id="intensityDetail">—</div>
+      </div>
+    </div>
+
+    <div class="alerts-container" id="alertsContainer">
+      <div class="alert-placeholder" id="alertPlaceholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/>
+        </svg>
+        <span>健康助手已就绪，等待活动数据...</span>
+      </div>
+    </div>
+
+    <div class="llm-tip-card">
+      <div class="llm-tip-header">
+        <div class="llm-tip-avatar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"/><path d="M12 1v4m0 14v4M4.22 4.22l2.83 2.83m9.9 9.9 2.83 2.83M1 12h4m14 0h4M4.22 19.78l2.83-2.83m9.9-9.9 2.83-2.83"/>
+          </svg>
+        </div>
+        <div>
+          <div class="llm-tip-title">AI 健康建议</div>
+          <div class="llm-tip-model" id="llmModelName">qwen2.5:7b</div>
+        </div>
+      </div>
+      <div class="llm-tip-body" id="llmTipBody">
+        健康助手已就绪，正在监测您的活动状态...
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════ ACTIVITY ═══════════════════ -->
+  <section id="section-activity" class="content-section">
+
+    <div class="section-header">
+      <h2>活动监测</h2>
+      <p>实时显示当前活动状态、持续时间和置信度</p>
+    </div>
+
+    <div class="activity-grid">
+      <div class="card">
+        <div class="card-header"><h3>状态机</h3></div>
+        <div class="statemachine-viz">
+          <div class="sm-state" id="smIdle">
+            <div class="sm-circle idle-circle"><span class="sm-label">IDLE</span></div>
+            <div class="sm-desc">低功耗状态</div>
+          </div>
+          <div class="sm-arrow" id="arrowIdleCheck">
+            <div class="arrow-line"></div>
+            <div class="arrow-head"></div>
+            <div class="arrow-label">var &gt; upper</div>
+          </div>
+          <div class="sm-state" id="smCheck">
+            <div class="sm-circle check-circle"><span class="sm-label">CHECK</span></div>
+            <div class="sm-desc">瞬态检测</div>
+          </div>
+          <div class="sm-arrow" id="arrowCheckActive">
+            <div class="arrow-line"></div>
+            <div class="arrow-head"></div>
+            <div class="arrow-label">RF = 1</div>
+          </div>
+          <div class="sm-state" id="smActive">
+            <div class="sm-circle active-circle"><span class="sm-label">ACTIVE</span></div>
+            <div class="sm-desc">活动识别</div>
+          </div>
+          <div class="sm-arrow" id="arrowActiveIdle">
+            <div class="arrow-line"></div>
+            <div class="arrow-head"></div>
+            <div class="arrow-label">var &lt; lower</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><h3>活动识别</h3></div>
+        <div class="activity-display">
+          <div class="activity-badge" id="activityBadge">—</div>
+          <div class="activity-confidence">
+            <div class="confidence-label">置信度</div>
+            <div class="confidence-bar-container">
+              <div class="confidence-bar" id="confidenceBar" style="width:0%"></div>
+            </div>
+            <div class="confidence-value" id="confidenceValue">0%</div>
+          </div>
+          <div class="activity-predictions">
+            <div class="pred-title">预测概率</div>
+            <div class="pred-item"><span class="pred-label">WALKING</span><div class="pred-bar-bg"><div class="pred-bar" id="predWalking" style="width:0%"></div></div><span class="pred-pct" id="pctWalking">0%</span></div>
+            <div class="pred-item"><span class="pred-label">W_UP</span><div class="pred-bar-bg"><div class="pred-bar" id="predWalkingUp" style="width:0%"></div></div><span class="pred-pct" id="pctWalkingUp">0%</span></div>
+            <div class="pred-item"><span class="pred-label">W_DOWN</span><div class="pred-bar-bg"><div class="pred-bar" id="predWalkingDown" style="width:0%"></div></div><span class="pred-pct" id="pctWalkingDown">0%</span></div>
+            <div class="pred-item"><span class="pred-label">SITTING</span><div class="pred-bar-bg"><div class="pred-bar" id="predSitting" style="width:0%"></div></div><span class="pred-pct" id="pctSitting">0%</span></div>
+            <div class="pred-item"><span class="pred-label">STANDING</span><div class="pred-bar-bg"><div class="pred-bar" id="predStanding" style="width:0%"></div></div><span class="pred-pct" id="pctStanding">0%</span></div>
+            <div class="pred-item"><span class="pred-label">LAYING</span><div class="pred-bar-bg"><div class="pred-bar" id="predLaying" style="width:0%"></div></div><span class="pred-pct" id="pctLaying">0%</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h3>模拟控制</h3>
+        <p class="card-sub">手动注入活动事件进行测试</p>
+      </div>
+      <div class="sim-buttons">
+        <button class="sim-btn" data-activity="SITTING">坐姿</button>
+        <button class="sim-btn" data-activity="STANDING">站立</button>
+        <button class="sim-btn" data-activity="LAYING">躺卧</button>
+        <button class="sim-btn active-sim" data-activity="WALKING">行走</button>
+        <button class="sim-btn" data-activity="WALKING_UPSTAIRS">上楼</button>
+        <button class="sim-btn" data-activity="WALKING_DOWNSTAIRS">下楼</button>
+      </div>
+      <div class="sim-duration">
+        <label>持续时间</label>
+        <input type="range" id="simDuration" min="5" max="120" value="30" step="5">
+        <span id="simDurationVal">30s</span>
+      </div>
+      <button class="btn btn-primary" id="injectBtn">注入活动</button>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><h3>状态分布</h3></div>
+      <div class="chart-wrapper"><canvas id="stateChart"></canvas></div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><h3>卡路里消耗曲线</h3></div>
+      <div class="chart-wrapper"><canvas id="calorieChart"></canvas></div>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════ GOALS ═══════════════════ -->
+  <section id="section-goals" class="content-section">
+
+    <div class="section-header">
+      <h2>目标追踪</h2>
+      <p>基于 WHO 指南的自适应每日运动目标</p>
+    </div>
+
+    <div class="goals-grid">
+      <div class="goal-card">
+        <div class="goal-ring">
+          <svg viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="52" class="ring-bg"/>
+            <circle cx="60" cy="60" r="52" class="ring-fill active-ring" id="activeRing" stroke-dasharray="0 327"/>
+          </svg>
+          <div class="ring-label">
+            <span class="ring-pct" id="activeGoalPct">0%</span>
+            <span class="ring-sub">活动</span>
+          </div>
+        </div>
+        <div class="goal-info">
+          <div class="goal-title">每日活动时间目标</div>
+          <div class="goal-values">
+            <span class="goal-achieved" id="goalActiveAchieved">0</span>
+            <span class="goal-sep">/</span>
+            <span class="goal-target" id="goalActiveTarget">30</span>
+            <span class="goal-unit">min</span>
+          </div>
+          <div class="goal-remaining" id="goalActiveRemaining">还差 30 分钟</div>
+        </div>
+      </div>
+
+      <div class="goal-card">
+        <div class="goal-ring">
+          <svg viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="52" class="ring-bg"/>
+            <circle cx="60" cy="60" r="52" class="ring-fill cal-ring" id="calRing" stroke-dasharray="0 327"/>
+          </svg>
+          <div class="ring-label">
+            <span class="ring-pct" id="calGoalPct">0%</span>
+            <span class="ring-sub">热量</span>
+          </div>
+        </div>
+        <div class="goal-info">
+          <div class="goal-title">每日卡路里目标</div>
+          <div class="goal-values">
+            <span class="goal-achieved" id="goalCalAchieved">0</span>
+            <span class="goal-sep">/</span>
+            <span class="goal-target" id="goalCalTarget">200</span>
+            <span class="goal-unit">kcal</span>
+          </div>
+          <div class="goal-remaining" id="goalCalRemaining">还差 200 kcal</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><h3>WHO 活动指南</h3></div>
+      <div class="who-guide">
+        <div class="who-level" id="whoActive">
+          <div class="who-badge active-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            活跃
+          </div>
+          <div class="who-desc">≥ 21.4 min 中等强度 / 日</div>
+          <div class="who-check" id="whoActiveCheck">未达成</div>
+        </div>
+        <div class="who-level" id="whoModerate">
+          <div class="who-badge moderate-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            适度
+          </div>
+          <div class="who-desc">≥ 10.7 min 中等强度 / 日</div>
+          <div class="who-check" id="whoModerateCheck">未达成</div>
+        </div>
+        <div class="who-level" id="whoInsufficient">
+          <div class="who-badge insufficient-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
+            不足
+          </div>
+          <div class="who-desc">低于 WHO 最低建议</div>
+          <div class="who-check" id="whoInsufficientCheck">当前状态</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════ TREND ═══════════════════ -->
+  <section id="section-trend" class="content-section">
+
+    <div class="section-header">
+      <h2>趋势分析</h2>
+      <p>过去 7 天的活动数据回顾与趋势分析</p>
+    </div>
+
+    <div class="trend-summary">
+      <div class="trend-indicator">
+        <div class="trend-arrow" id="trendArrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/>
+          </svg>
+        </div>
+        <div class="trend-text">
+          <div class="trend-dir" id="trendDir">稳定</div>
+          <div class="trend-change" id="trendChange">0%</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><h3>每日活动分钟数</h3></div>
+      <div class="chart-wrapper"><canvas id="trendChart"></canvas></div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><h3>每日卡路里消耗</h3></div>
+      <div class="chart-wrapper"><canvas id="trendCalChart"></canvas></div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><h3>活动类型分布</h3></div>
+      <div class="chart-wrapper"><canvas id="activityPieChart"></canvas></div>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════ LLM ═══════════════════ -->
+  <section id="section-llm" class="content-section">
+
+    <div class="section-header">
+      <h2>AI 健康助手</h2>
+      <p>基于 Ollama 本地大模型 (qwen2.5:7b) 的智能健康建议</p>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><h3>LLM 设置</h3></div>
+      <div class="llm-info-grid">
+        <div class="llm-info-item">
+          <span class="llm-info-label">连接状态</span>
+          <span class="llm-info-value" id="llmConnStatus">检测中...</span>
+        </div>
+        <div class="llm-info-item">
+          <span class="llm-info-label">模型</span>
+          <span class="llm-info-value">qwen2.5:7b</span>
+        </div>
+        <div class="llm-info-item">
+          <span class="llm-info-label">端点</span>
+          <span class="llm-info-value">http://localhost:11434</span>
+        </div>
+        <div class="llm-info-item">
+          <span class="llm-info-label">提示间隔</span>
+          <span class="llm-info-value">60 秒</span>
+        </div>
+      </div>
+      <button class="btn btn-ghost" id="checkLlmBtn">检查连接</button>
+    </div>
+
+    <div class="llm-chat-card">
+      <div class="llm-chat-header">
+        <div class="llm-tip-avatar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"/><path d="M12 1v4m0 14v4M4.22 4.22l2.83 2.83m9.9 9.9 2.83 2.83M1 12h4m14 0h4M4.22 19.78l2.83-2.83m9.9-9.9 2.83-2.83"/>
+          </svg>
+        </div>
+        <div class="llm-chat-title">AI 健康助手</div>
+        <div class="llm-chat-subtitle">基于实时运动数据分析</div>
+      </div>
+      <div class="llm-chat-body" id="llmChatBody">
+        <div class="chat-message bot">
+          <div class="chat-avatar bot-avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3"/><path d="M12 1v4m0 14v4M4.22 4.22l2.83 2.83m9.9 9.9 2.83 2.83M1 12h4m14 0h4M4.22 19.78l2.83-2.83m9.9-9.9 2.83-2.83"/>
+            </svg>
+          </div>
+          <div class="chat-bubble bot-bubble" id="llmChatTip">
+            健康助手已就绪，正在分析您的活动数据...
+          </div>
+        </div>
+      </div>
+      <div class="llm-chat-footer">
+        <input type="text" class="chat-input" id="llmChatInput"
+          placeholder="发送消息给 AI 健康助手..." disabled>
+        <button class="btn btn-primary chat-send" id="llmSendBtn" disabled>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>

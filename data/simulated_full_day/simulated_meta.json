@@ -1,0 +1,838 @@
+{
+  "experiment": "simulated_full_day",
+  "duration_s": 600,
+  "sampling_rate_hz": 50,
+  "window_len_s": 2.56,
+  "window_overlap": 0.5,
+  "step_s": 0.5,
+  "n_windows": 1195,
+  "n_normal_samples": 637,
+  "n_interference_samples": 558,
+  "n_interference_events": 120,
+  "random_seed": 42,
+  "activity_timeline": [
+    [
+      0,
+      30,
+      "LAYING"
+    ],
+    [
+      30,
+      60,
+      "STANDING"
+    ],
+    [
+      60,
+      100,
+      "WALKING"
+    ],
+    [
+      100,
+      150,
+      "SITTING"
+    ],
+    [
+      150,
+      170,
+      "WALKING"
+    ],
+    [
+      170,
+      210,
+      "SITTING"
+    ],
+    [
+      210,
+      230,
+      "STANDING"
+    ],
+    [
+      230,
+      270,
+      "WALKING"
+    ],
+    [
+      270,
+      320,
+      "SITTING"
+    ],
+    [
+      320,
+      340,
+      "WALKING_UPSTAIRS"
+    ],
+    [
+      340,
+      360,
+      "WALKING"
+    ],
+    [
+      360,
+      380,
+      "STANDING"
+    ],
+    [
+      380,
+      410,
+      "WALKING"
+    ],
+    [
+      410,
+      460,
+      "SITTING"
+    ],
+    [
+      460,
+      480,
+      "WALKING"
+    ],
+    [
+      480,
+      520,
+      "SITTING"
+    ],
+    [
+      520,
+      545,
+      "WALKING_DOWNSTAIRS"
+    ],
+    [
+      545,
+      570,
+      "WALKING"
+    ],
+    [
+      570,
+      585,
+      "STANDING"
+    ],
+    [
+      585,
+      600,
+      "LAYING"
+    ]
+  ],
+  "interference_events": [
+    {
+      "time_s": 1.292,
+      "type": "tap",
+      "intensity": 0.412,
+      "index": 0
+    },
+    {
+      "time_s": 2.126,
+      "type": "rotate",
+      "intensity": 0.305,
+      "index": 1
+    },
+    {
+      "time_s": 4.311,
+      "type": "putdown",
+      "intensity": 0.705,
+      "index": 2
+    },
+    {
+      "time_s": 4.69,
+      "type": "rotate",
+      "intensity": 0.644,
+      "index": 3
+    },
+    {
+      "time_s": 23.825,
+      "type": "shake_light",
+      "intensity": 0.535,
+      "index": 4
+    },
+    {
+      "time_s": 27.472,
+      "type": "shake_medium",
+      "intensity": 0.818,
+      "index": 5
+    },
+    {
+      "time_s": 28.246,
+      "type": "shake_light",
+      "intensity": 0.322,
+      "index": 6
+    },
+    {
+      "time_s": 34.099,
+      "type": "pickup",
+      "intensity": 0.264,
+      "index": 7
+    },
+    {
+      "time_s": 38.085,
+      "type": "tap",
+      "intensity": 0.677,
+      "index": 8
+    },
+    {
+      "time_s": 42.479,
+      "type": "shake_medium",
+      "intensity": 0.423,
+      "index": 9
+    },
+    {
+      "time_s": 43.92,
+      "type": "shake_medium",
+      "intensity": 0.605,
+      "index": 10
+    },
+    {
+      "time_s": 55.601,
+      "type": "shake_light",
+      "intensity": 0.487,
+      "index": 11
+    },
+    {
+      "time_s": 60.55,
+      "type": "shake_heavy",
+      "intensity": 0.563,
+      "index": 12
+    },
+    {
+      "time_s": 63.793,
+      "type": "putdown",
+      "intensity": 0.439,
+      "index": 13
+    },
+    {
+      "time_s": 67.068,
+      "type": "putdown",
+      "intensity": 0.923,
+      "index": 14
+    },
+    {
+      "time_s": 68.674,
+      "type": "pickup",
+      "intensity": 0.801,
+      "index": 15
+    },
+    {
+      "time_s": 75.393,
+      "type": "putdown",
+      "intensity": 0.58,
+      "index": 16
+    },
+    {
+      "time_s": 79.408,
+      "type": "shake_heavy",
+      "intensity": 0.905,
+      "index": 17
+    },
+    {
+      "time_s": 80.508,
+      "type": "shake_light",
+      "intensity": 0.912,
+      "index": 18
+    },
+    {
+      "time_s": 82.93,
+      "type": "tap",
+      "intensity": 0.273,
+      "index": 19
+    },
+    {
+      "time_s": 93.21,
+      "type": "rotate",
+      "intensity": 0.469,
+      "index": 20
+    },
+    {
+      "time_s": 95.716,
+      "type": "tap",
+      "intensity": 0.472,
+      "index": 21
+    },
+    {
+      "time_s": 95.909,
+      "type": "putdown",
+      "intensity": 0.538,
+      "index": 22
+    },
+    {
+      "time_s": 99.704,
+      "type": "tap",
+      "intensity": 0.585,
+      "index": 23
+    },
+    {
+      "time_s": 102.598,
+      "type": "putdown",
+      "intensity": 0.396,
+      "index": 24
+    },
+    {
+      "time_s": 111.402,
+      "type": "pickup",
+      "intensity": 0.254,
+      "index": 25
+    },
+    {
+      "time_s": 113.844,
+      "type": "shake_medium",
+      "intensity": 0.975,
+      "index": 26
+    },
+    {
+      "time_s": 114.151,
+      "type": "shake_light",
+      "intensity": 0.727,
+      "index": 27
+    },
+    {
+      "time_s": 114.858,
+      "type": "pickup",
+      "intensity": 0.559,
+      "index": 28
+    },
+    {
+      "time_s": 119.203,
+      "type": "putdown",
+      "intensity": 0.761,
+      "index": 29
+    },
+    {
+      "time_s": 125.599,
+      "type": "shake_heavy",
+      "intensity": 0.761,
+      "index": 30
+    },
+    {
+      "time_s": 137.251,
+      "type": "shake_light",
+      "intensity": 0.888,
+      "index": 31
+    },
+    {
+      "time_s": 137.314,
+      "type": "shake_light",
+      "intensity": 0.844,
+      "index": 32
+    },
+    {
+      "time_s": 139.48,
+      "type": "pickup",
+      "intensity": 0.221,
+      "index": 33
+    },
+    {
+      "time_s": 143.092,
+      "type": "tap",
+      "intensity": 0.305,
+      "index": 34
+    },
+    {
+      "time_s": 143.552,
+      "type": "shake_medium",
+      "intensity": 0.902,
+      "index": 35
+    },
+    {
+      "time_s": 145.677,
+      "type": "tap",
+      "intensity": 0.846,
+      "index": 36
+    },
+    {
+      "time_s": 146.813,
+      "type": "shake_medium",
+      "intensity": 0.789,
+      "index": 37
+    },
+    {
+      "time_s": 147.853,
+      "type": "pickup",
+      "intensity": 0.631,
+      "index": 38
+    },
+    {
+      "time_s": 148.619,
+      "type": "shake_light",
+      "intensity": 0.47,
+      "index": 39
+    },
+    {
+      "time_s": 156.329,
+      "type": "putdown",
+      "intensity": 0.773,
+      "index": 40
+    },
+    {
+      "time_s": 184.801,
+      "type": "rotate",
+      "intensity": 0.978,
+      "index": 41
+    },
+    {
+      "time_s": 186.874,
+      "type": "putdown",
+      "intensity": 0.72,
+      "index": 42
+    },
+    {
+      "time_s": 188.006,
+      "type": "shake_light",
+      "intensity": 0.667,
+      "index": 43
+    },
+    {
+      "time_s": 194.407,
+      "type": "rotate",
+      "intensity": 0.821,
+      "index": 44
+    },
+    {
+      "time_s": 203.412,
+      "type": "rotate",
+      "intensity": 0.287,
+      "index": 45
+    },
+    {
+      "time_s": 206.201,
+      "type": "shake_heavy",
+      "intensity": 0.846,
+      "index": 46
+    },
+    {
+      "time_s": 212.401,
+      "type": "tap",
+      "intensity": 0.574,
+      "index": 47
+    },
+    {
+      "time_s": 216.8,
+      "type": "shake_medium",
+      "intensity": 0.764,
+      "index": 48
+    },
+    {
+      "time_s": 224.161,
+      "type": "shake_medium",
+      "intensity": 0.632,
+      "index": 49
+    },
+    {
+      "time_s": 239.441,
+      "type": "shake_medium",
+      "intensity": 0.998,
+      "index": 50
+    },
+    {
+      "time_s": 240.498,
+      "type": "shake_light",
+      "intensity": 0.369,
+      "index": 51
+    },
+    {
+      "time_s": 251.502,
+      "type": "tap",
+      "intensity": 0.671,
+      "index": 52
+    },
+    {
+      "time_s": 252.918,
+      "type": "shake_heavy",
+      "intensity": 0.57,
+      "index": 53
+    },
+    {
+      "time_s": 252.942,
+      "type": "shake_light",
+      "intensity": 0.275,
+      "index": 54
+    },
+    {
+      "time_s": 260.642,
+      "type": "tap",
+      "intensity": 0.203,
+      "index": 55
+    },
+    {
+      "time_s": 262.641,
+      "type": "pickup",
+      "intensity": 0.561,
+      "index": 56
+    },
+    {
+      "time_s": 262.692,
+      "type": "pickup",
+      "intensity": 0.763,
+      "index": 57
+    },
+    {
+      "time_s": 277.125,
+      "type": "shake_heavy",
+      "intensity": 0.992,
+      "index": 58
+    },
+    {
+      "time_s": 280.596,
+      "type": "shake_heavy",
+      "intensity": 0.977,
+      "index": 59
+    },
+    {
+      "time_s": 291.006,
+      "type": "pickup",
+      "intensity": 0.306,
+      "index": 60
+    },
+    {
+      "time_s": 292.875,
+      "type": "rotate",
+      "intensity": 0.241,
+      "index": 61
+    },
+    {
+      "time_s": 300.101,
+      "type": "shake_medium",
+      "intensity": 0.606,
+      "index": 62
+    },
+    {
+      "time_s": 301.459,
+      "type": "rotate",
+      "intensity": 0.625,
+      "index": 63
+    },
+    {
+      "time_s": 327.081,
+      "type": "rotate",
+      "intensity": 0.495,
+      "index": 64
+    },
+    {
+      "time_s": 329.607,
+      "type": "shake_heavy",
+      "intensity": 0.622,
+      "index": 65
+    },
+    {
+      "time_s": 330.732,
+      "type": "tap",
+      "intensity": 0.649,
+      "index": 66
+    },
+    {
+      "time_s": 331.239,
+      "type": "tap",
+      "intensity": 0.302,
+      "index": 67
+    },
+    {
+      "time_s": 333.183,
+      "type": "putdown",
+      "intensity": 0.589,
+      "index": 68
+    },
+    {
+      "time_s": 347.219,
+      "type": "pickup",
+      "intensity": 0.249,
+      "index": 69
+    },
+    {
+      "time_s": 349.912,
+      "type": "pickup",
+      "intensity": 0.453,
+      "index": 70
+    },
+    {
+      "time_s": 352.691,
+      "type": "shake_medium",
+      "intensity": 0.671,
+      "index": 71
+    },
+    {
+      "time_s": 359.067,
+      "type": "tap",
+      "intensity": 0.216,
+      "index": 72
+    },
+    {
+      "time_s": 362.595,
+      "type": "putdown",
+      "intensity": 0.474,
+      "index": 73
+    },
+    {
+      "time_s": 363.653,
+      "type": "shake_medium",
+      "intensity": 0.943,
+      "index": 74
+    },
+    {
+      "time_s": 366.701,
+      "type": "rotate",
+      "intensity": 0.723,
+      "index": 75
+    },
+    {
+      "time_s": 372.385,
+      "type": "pickup",
+      "intensity": 0.997,
+      "index": 76
+    },
+    {
+      "time_s": 380.254,
+      "type": "rotate",
+      "intensity": 0.421,
+      "index": 77
+    },
+    {
+      "time_s": 383.05,
+      "type": "pickup",
+      "intensity": 0.359,
+      "index": 78
+    },
+    {
+      "time_s": 383.336,
+      "type": "shake_light",
+      "intensity": 0.793,
+      "index": 79
+    },
+    {
+      "time_s": 383.68,
+      "type": "pickup",
+      "intensity": 0.376,
+      "index": 80
+    },
+    {
+      "time_s": 385.39,
+      "type": "shake_medium",
+      "intensity": 0.412,
+      "index": 81
+    },
+    {
+      "time_s": 386.978,
+      "type": "tap",
+      "intensity": 0.453,
+      "index": 82
+    },
+    {
+      "time_s": 387.385,
+      "type": "shake_light",
+      "intensity": 0.522,
+      "index": 83
+    },
+    {
+      "time_s": 390.961,
+      "type": "pickup",
+      "intensity": 0.869,
+      "index": 84
+    },
+    {
+      "time_s": 392.935,
+      "type": "tap",
+      "intensity": 0.908,
+      "index": 85
+    },
+    {
+      "time_s": 405.681,
+      "type": "pickup",
+      "intensity": 0.27,
+      "index": 86
+    },
+    {
+      "time_s": 409.787,
+      "type": "shake_light",
+      "intensity": 0.687,
+      "index": 87
+    },
+    {
+      "time_s": 412.155,
+      "type": "rotate",
+      "intensity": 0.411,
+      "index": 88
+    },
+    {
+      "time_s": 417.607,
+      "type": "putdown",
+      "intensity": 0.996,
+      "index": 89
+    },
+    {
+      "time_s": 432.894,
+      "type": "putdown",
+      "intensity": 0.411,
+      "index": 90
+    },
+    {
+      "time_s": 437.081,
+      "type": "putdown",
+      "intensity": 0.723,
+      "index": 91
+    },
+    {
+      "time_s": 437.474,
+      "type": "pickup",
+      "intensity": 0.3,
+      "index": 92
+    },
+    {
+      "time_s": 445.079,
+      "type": "shake_medium",
+      "intensity": 0.418,
+      "index": 93
+    },
+    {
+      "time_s": 447.835,
+      "type": "tap",
+      "intensity": 0.918,
+      "index": 94
+    },
+    {
+      "time_s": 450.743,
+      "type": "shake_light",
+      "intensity": 0.207,
+      "index": 95
+    },
+    {
+      "time_s": 452.781,
+      "type": "putdown",
+      "intensity": 0.361,
+      "index": 96
+    },
+    {
+      "time_s": 460.775,
+      "type": "shake_heavy",
+      "intensity": 0.289,
+      "index": 97
+    },
+    {
+      "time_s": 466.787,
+      "type": "pickup",
+      "intensity": 0.935,
+      "index": 98
+    },
+    {
+      "time_s": 470.05,
+      "type": "tap",
+      "intensity": 0.428,
+      "index": 99
+    },
+    {
+      "time_s": 485.254,
+      "type": "shake_light",
+      "intensity": 0.807,
+      "index": 100
+    },
+    {
+      "time_s": 489.206,
+      "type": "rotate",
+      "intensity": 0.626,
+      "index": 101
+    },
+    {
+      "time_s": 497.228,
+      "type": "pickup",
+      "intensity": 0.908,
+      "index": 102
+    },
+    {
+      "time_s": 500.049,
+      "type": "shake_medium",
+      "intensity": 0.496,
+      "index": 103
+    },
+    {
+      "time_s": 516.037,
+      "type": "shake_light",
+      "intensity": 0.744,
+      "index": 104
+    },
+    {
+      "time_s": 516.379,
+      "type": "pickup",
+      "intensity": 0.278,
+      "index": 105
+    },
+    {
+      "time_s": 516.661,
+      "type": "tap",
+      "intensity": 0.296,
+      "index": 106
+    },
+    {
+      "time_s": 518.358,
+      "type": "shake_light",
+      "intensity": 0.332,
+      "index": 107
+    },
+    {
+      "time_s": 524.254,
+      "type": "shake_light",
+      "intensity": 0.555,
+      "index": 108
+    },
+    {
+      "time_s": 527.123,
+      "type": "shake_heavy",
+      "intensity": 0.428,
+      "index": 109
+    },
+    {
+      "time_s": 533.727,
+      "type": "shake_medium",
+      "intensity": 0.663,
+      "index": 110
+    },
+    {
+      "time_s": 552.916,
+      "type": "shake_light",
+      "intensity": 0.642,
+      "index": 111
+    },
+    {
+      "time_s": 556.995,
+      "type": "rotate",
+      "intensity": 0.845,
+      "index": 112
+    },
+    {
+      "time_s": 558.588,
+      "type": "shake_light",
+      "intensity": 0.951,
+      "index": 113
+    },
+    {
+      "time_s": 560.841,
+      "type": "pickup",
+      "intensity": 0.661,
+      "index": 114
+    },
+    {
+      "time_s": 565.274,
+      "type": "putdown",
+      "intensity": 0.452,
+      "index": 115
+    },
+    {
+      "time_s": 567.696,
+      "type": "shake_light",
+      "intensity": 0.786,
+      "index": 116
+    },
+    {
+      "time_s": 580.913,
+      "type": "rotate",
+      "intensity": 0.879,
+      "index": 117
+    },
+    {
+      "time_s": 587.389,
+      "type": "shake_medium",
+      "intensity": 0.793,
+      "index": 118
+    },
+    {
+      "time_s": 590.64,
+      "type": "rotate",
+      "intensity": 0.386,
+      "index": 119
+    }
+  ],
+  "note": "全天模拟数据集：基于UCI HAR各行为数据拼接600秒连续序列，包含自然状态切换和120次模拟干扰。正常行为标签1-6，干扰标签7。"
+}
